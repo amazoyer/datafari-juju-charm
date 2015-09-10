@@ -1,5 +1,5 @@
 # Overview
-Datafari is the perfect product for anyone who needs to search within its corporate big data,
+[Datafari](http://www.datafari.com/) is the perfect product for anyone who needs to search within its corporate big data,
 based on the most advanced open source technologies.
 Datafari combines both the Apache ManifoldCF and Solr products, and proposes to its users to search into file shares,
 cloud shares (dropbox, google drive), databases, but also emails and many more sources. 
@@ -10,11 +10,13 @@ you just need to mention that you are using it.
 
 
 # Usage
-You can deploy datafari with "juju deploy datafari"
+You can deploy datafari with :
+  juju deploy datafari
+
 You can then browse to http://ip-address:8080/Datafari
 
 # Warning
-Still alpha version. For testing purposes only. Works only for HDFS repositories
+Still in alpha version. For testing purposes only. Works only for HDFS repositories
 
 # Contact Information
 aurelien.mazoyer@francelabs.com

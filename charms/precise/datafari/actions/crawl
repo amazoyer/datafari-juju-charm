@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+juju-log "Start crawling job"
+MCF_HOST=localhost
+MCF_URL=http://$MCF_HOST:8080/datafari-mcf-api-service/json
+JOB_ID=$(curl ${MCF_URL}/jobs | jq --raw-output .job.id)
+curl -X PUT ${MCF_URL}/start/${JOB_ID}

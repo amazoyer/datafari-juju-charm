@@ -1,0 +1,14 @@
+name: datafari
+summary: Datafari is an open source search solution
+maintainer: aurelien.mazoyer@francelabs.com
+description: Datafari is the perfect product for anyone who needs to search within its corporate big data, based on the most advanced open source technologies. Datafari is based on two well-known open source project, Apache Solr and Apache ManifoldCF.
+tags:
+  - big_data
+subordinate: false
+provides:
+  website:
+    interface: http
+requires:
+  hadoop:
+    interface: dfs
+    optional: true

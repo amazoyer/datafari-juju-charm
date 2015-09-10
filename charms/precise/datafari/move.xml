@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<project name="charm_copy" default="copy" basedir=".">
+
+	<!-- ========================= PROPERTIES ============================= -->
+
+    <!-- Deployment properties -->
+	<property name="charm.dir" value="/root/charms/precise/datafari" />
+	<property name="project.dir" value="." />
+	
+
+	<target name="copy" >
+		<copy todir="${charm.dir}" overwrite="true">
+			<fileset dir="${project.dir}/">
+				<include name="**" />
+			</fileset>
+		</copy>
+	</target>
+
+</project>

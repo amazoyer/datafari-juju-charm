@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+
+# Download link
+dl="ftp://178.33.82.49/debian/datafari_charm.deb"
+
+# Install unzip
+apt-get install unzip
+
+# Grab Datafari 
+status-set maintenance "Fetching and installing Datafari"
+wget "$dl" -O /tmp/datafari.deb
+# Install datafari
+juju-log "Installing Datafari"
+dpkg -i /tmp/datafari.deb
+
+# Open port
+open-port 8080

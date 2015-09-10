@@ -1,0 +1,95 @@
+#!/bin/bash
+
+set -e
+juju-log "Configuring Manifold CF connector to hadoop instance and crawl job"
+
+
+HADOOP_HOST=`relation-get private-address`
+MCF_HOST=localhost
+JOB_ID=121212
+MCF_PUT_URL=http://$MCF_HOST:8080/datafari-mcf-api-service/json
+
+# Post HDFS Connector
+curl -i -X PUT ${MCF_PUT_URL}/repositoryconnections/hadoop \
+    -H "Content-Type: application/json" \
+    --data '{
+   "repositoryconnection":{
+      "isnew":"true",
+      "name":"hadoop",
+      "class_name":"org.apache.manifoldcf.crawler.connectors.hdfs.HDFSRepositoryConnector",
+      "max_connections":"10",
+      "description":"",
+      "configuration":{
+         "_PARAMETER_":[
+            {
+               "_value_":"hdfs",
+               "_attribute_name":"namenodeprotocol"
+            },
+            {
+               "_value_":"'"$HADOOP_HOST"'",
+               "_attribute_name":"namenodehost"
+            },
+            {
+               "_value_":"9000",
+               "_attribute_name":"namenodeport"
+            },
+            {
+               "_value_":"ubuntu",
+               "_attribute_name":"user"
+            }
+         ]
+      }
+   }
+}
+'
+
+# Create JOB configuration
+curl -i -X PUT ${MCF_PUT_URL}/jobs/${JOB_ID} \
+    -H "Content-Type: application/json" \
+    --data '{
+  "job": {
+    "id": "'"$JOB_ID"'",
+    "description": "CrawlHadoop",
+    "repository_connection": "hadoop",
+    "document_specification": {
+      "startpoint": {
+        "_value_": "",
+        "_attribute_path": "/",
+        "_attribute_converttouri": "false",
+        "include": [
+          {
+            "_value_": "",
+            "_attribute_match": "*",
+            "_attribute_type": "file"
+          },
+          {
+            "_value_": "",
+            "_attribute_match": "*",
+            "_attribute_type": "directory"
+          }
+        ]
+      }
+    },
+    "pipelinestage": {
+      "stage_id": "0",
+      "stage_isoutput": "true",
+      "stage_connectionname": "DatafariSolr",
+      "stage_specification": {
+        
+      }
+    },
+    "start_mode": "manual",
+    "run_mode": "scan once",
+    "hopcount_mode": "accurate",
+    "priority": "5",
+    "recrawl_interval": "86400000",
+    "expiration_interval": "infinite",
+    "reseed_interval": "3600000"
+  }
+}
+'
+
+juju-log "Start crawling"
+
+# Start crawl
+curl -X PUT ${MCF_PUT_URL}/start/${JOB_ID}

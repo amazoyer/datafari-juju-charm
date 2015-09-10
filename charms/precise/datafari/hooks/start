@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+
+# Start Datafari
+bash /opt/datafari/bin/start-datafari.sh

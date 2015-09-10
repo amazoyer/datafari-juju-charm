@@ -16,7 +16,7 @@ You can then expose its web interface :
 and browse to http://ip-address:8080/Datafari
 
 # Warning
-Still in alpha version. For testing purposes only. Works only for HDFS repositories
+Juju charm still in alpha version. For testing purposes only. Automatic integration only available for HDFS repositories.
 
 # Contact Information
 aurelien.mazoyer@francelabs.com

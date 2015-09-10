@@ -3,17 +3,17 @@
 based on the most advanced open source technologies.
 Datafari combines both the Apache ManifoldCF and Solr products, and proposes to its users to search into file shares,
 cloud shares (dropbox, google drive), databases, but also emails and many more sources. 
-Available as community and enterprise edition, Datafari is different from the competition : 
-- Its open source license is not aggressive, as it uses the Apache v2 license: you are free to do whatever you want with it,
-you just need to mention that you are using it. 
-- It combines two renowned Apache projects, namely ManifoldCF and Solr, which gives Datafari a long term vision.
-
 
 # Usage
 You can deploy datafari with :
+
   juju deploy datafari
 
-You can then browse to http://ip-address:8080/Datafari
+You can then expose it: 
+
+  juju expose datafari
+  
+and browse to http://ip-address:8080/Datafari
 
 # Warning
 Still in alpha version. For testing purposes only. Works only for HDFS repositories

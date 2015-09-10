@@ -9,7 +9,7 @@ You can deploy datafari with :
 
   juju deploy datafari
 
-You can then expose it: 
+You can then expose its web interface : 
 
   juju expose datafari
   
